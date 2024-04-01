@@ -1,0 +1,52 @@
+<div nv-file-drop nv-file-over uploader="$ctrl.uploader" over-class="lvg-card-files__dropzone-over" class="lvg-card-files__dropzone">
+    <md-card class="lvg-card-files__files">
+        <md-card-content>
+            <div class="lvg-card-files__file-table">
+                <lvg-card-file file="file"
+                               on-delete="$ctrl.delete($file)"
+                               ng-repeat="file in $ctrl.files track by file.digest" class="lvg-card-file"></lvg-card-file>
+                <div ng-repeat="item in $ctrl.uploader.queue track by $index" class="lvg-card-file">
+                    <div class="lvg-card-file__metadata lvg-card-file__metadata-name">{{ item.file.name }}</div>
+                    <div class="lvg-card-file__metadata lvg-card-file__metadata-size">{{ item.file.size | fileBytes }}</div>
+                    <div class="lvg-card-file__metadata lvg-card-file__metadata-status">
+                        <span ng-if="item.isReady && !item.isUploading"><span data-translate>card.files.status.queue</span></span>
+                        <span ng-if="item.isUploading"><span data-translate>card.files.status.uploading</span></span>
+                        <span ng-if="item.isError"><span data-translate>card.files.status.error</span></span>
+                    </div>
+                    <div class="lvg-card-file__metadata lvg-card-file__metadata-progress" ng-class="{'lvg-card-file__action-retry':item.isError}">
+                        <md-progress-linear ng-if="item.isReady || item.isUploading" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
+                        <md-button ng-if="item.isError" class="lvg-small-icon-button" ng-click="item.upload()">
+                            <md-tooltip><span translate>card.files.tooltip.retry</span></md-tooltip>
+                            <md-icon md-svg-icon="replay"></md-icon>
+                        </md-button>
+                    </div>
+                    <div class="lvg-card-file__metadata lvg-card-file__action">
+                        <md-button ng-if="item.isError || item.isReady && !item.isUploading" class="lvg-small-icon-button" ng-click="item.remove()">
+                            <md-tooltip><span translate>card.files.tooltip.abort</span></md-tooltip>
+                            <md-icon md-svg-icon="delete"></md-icon>
+                        </md-button>
+                        <md-button ng-if="item.isUploading" class="lvg-small-icon-button" ng-click="item.cancel()">
+                            <md-tooltip><span translate>card.files.tooltip.abort</span></md-tooltip>
+                            <md-icon md-svg-icon="close"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <div class="lvg-card-files__no-files" ng-if="!$ctrl.files.length && !$ctrl.uploader.queue.length">
+                    <i data-translate>card.files.no-files</i>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-actions data-lvg-has-permission="CREATE_FILE" class="row start-xs middle-xs row-inherit">
+            <div class="flex no-grow">
+                <input type="file" name="files" id="files" class="lvg-input-file__input"
+                       nv-file-select uploader="$ctrl.uploader" multiple/>
+                <label class="lvg-input-file__label md-button md-primary" for="files">
+                    <span translate>button.filesSelect</span>
+                </label>
+            </div>
+            <div class="lvg-card-files__upload-notice flex">
+                <span data-translate>card.files.drop</span>
+            </div>
+        </md-card-actions>
+    </md-card>
+</div>

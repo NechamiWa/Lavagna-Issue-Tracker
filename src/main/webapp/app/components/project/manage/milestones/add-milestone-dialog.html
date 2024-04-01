@@ -1,0 +1,19 @@
+<form data-ng-submit="addMilestoneDialogCtrl.addLabelListValue(newMilestoneValue);addMilestoneDialogCtrl.close();">
+    <md-dialog-content class="md-dialog-content">
+        <h2 class="md-title" translate>project.manage.milestone.dialog.add.title</h2>
+        <md-input-container class="md-block">
+            <label data-translate>label.name</label>
+            <input type="text" id="name" placeholder="" required autocomplete="off"
+                   data-ng-model="newMilestoneValue" md-autofocus>
+        </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-primary" type="submit"
+                   data-ng-disabled="newMilestoneValue == null">
+            <span data-translate>button.add</span>
+        </md-button>
+        <md-button type="button" data-ng-click="addMilestoneDialogCtrl.close();">
+            <span data-translate>button.cancel</span>
+        </md-button>
+    </md-dialog-actions>
+</form>

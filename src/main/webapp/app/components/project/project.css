@@ -1,0 +1,74 @@
+/*
+	- contains project style such as milestones, status
+*/
+
+/*
+===================================
+==== project statistics ===========
+===================================
+*/
+
+table td.shrink {
+    white-space:nowrap
+}
+table td.expand {
+    width: 99%
+}
+
+.lvg-assigned-to-col {
+    min-width: 100px;
+}
+
+ul.statistics-definition {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+ul.statistics-definition li.stat {
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.lvg-milestone-clickable {
+	cursor: pointer;
+}
+
+.lvg-milestone-title {
+	min-height: 28px;
+}
+
+.lvg-milestone-title span.lvg-milestone-edit i.fa-pencil {
+	color: #d5d5d5;
+}
+
+.lvg-milestone-title span.lvg-milestone-edit:hover i.fa-pencil {
+	color: #333;
+}
+
+.lvg-milestone-chart {
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.lvg-milestone-card-title {
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 0;
+}
+
+.lvg-milestone-card {
+	border-top: 1px solid #dddddd;
+	padding: 5px 15px;
+	word-wrap: break-word;
+}
+
+.lvg-milestone-card:first-of-type {
+	border-top: 0;
+}
+
+.lvg-milestone-align-down-icon {
+	position: relative;
+	top:2px;
+}

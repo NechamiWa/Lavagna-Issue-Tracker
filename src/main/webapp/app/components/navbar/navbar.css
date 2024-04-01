@@ -1,0 +1,16 @@
+.lvg-navbar {
+    min-height: 64px !important;
+}
+
+.lvg-navbar-link,
+.lvg-navbar-link:link,
+.lvg-navbar-link:visited,
+.lvg-navbar-link:active,
+.lvg-navbar-link:focus {
+    color: white;
+}
+
+.lvg-navbar--sticky {
+    display: flex;
+    flex: 0 0 auto;
+}

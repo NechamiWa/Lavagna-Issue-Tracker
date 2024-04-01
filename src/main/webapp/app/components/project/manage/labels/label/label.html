@@ -1,0 +1,31 @@
+<md-card class="lvg-content__row-item" data-ng-style="$ctrl.label.color|columnColor">
+    <md-card-title>
+        <md-card-title-text>
+            <div class="row row-inherit">
+                <div class="lvg-headline">{{$ctrl.label.name}}</div>
+                <span class="flex"></span>
+                <md-button class="lvg-small-icon-button" ng-click="$ctrl.editLabel()">
+                    <md-tooltip>{{'button.edit'|translate}}</md-tooltip>
+                    <md-icon md-svg-icon="edit"></md-icon>
+                </md-button>
+                <md-button class="lvg-small-icon-button" ng-click="$ctrl.deleteLabel($event)" ng-disabled="$ctrl.useCount !== 0">
+                    <md-tooltip md-visible="showTooltip">{{($ctrl.useCount !== 0 ? 'project.manage.labels.cant.delete':'project.manage.labels.delete')|translate}}</md-tooltip>
+                    <md-icon ng-mouseenter="showTooltip = true;" ng-mouseleave="showTooltip = false;" md-svg-icon="delete"></md-icon>
+                </md-button>
+            </div>
+        </md-card-title-text>
+    </md-card-title>
+    <form name="labelForm" ng-submit="$ctrl.updateLabel(labelToUpdate); edit = false;">
+        <md-card-content>
+            <p>
+                <b data-translate>project.manage.labels.type</b>:
+                <span>{{'project.manage.labels.types.' + $ctrl.label.type | translate}}</span><span data-ng-if="$ctrl.label.unique">, <span data-translate>project.manage.labels.unique</span></span>
+            </p>
+            <p data-ng-if="$ctrl.label.type == 'LIST'">
+                <md-chips ng-model="$ctrl.labelListValues" readonly="true">
+                    <md-chip-template>{{$chip.value}}</md-chip-template>
+                </md-chips>
+            </p>
+        </md-card-content>
+    </form>
+</md-card>

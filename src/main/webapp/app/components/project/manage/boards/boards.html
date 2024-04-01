@@ -1,0 +1,53 @@
+<div class="lvg-content">
+	<md-card class="lvg-content__row lvg-content__row-item" ng-repeat="ab in $ctrl.boards">
+		<md-card-title>
+			<md-card-title-text>
+                <div class="row row-inherit">
+                    <div class="lvg-headline">{{::ab.shortName}} - {{::ab.name}}</div>
+                    <span class="flex"></span>
+                    <md-button class="lvg-small-icon-button" ng-click="edit = true" ng-hide="edit">
+                        <md-icon md-svg-icon="edit" aria-label="{{::('button.edit' | translate)}}"></md-icon>
+                        <md-tooltip><span translate>button.edit</span></md-tooltip>
+                    </md-button>
+                    <md-button class="lvg-small-icon-button" ng-click="$ctrl.archive(ab);" ng-if="!ab.archived">
+                        <md-icon md-svg-icon="archive" aria-label="{{::('common.archive' | translate)}}"></md-icon>
+                        <md-tooltip><span translate>common.archive</span></md-tooltip>
+                    </md-button>
+                    <md-button class="lvg-small-icon-button" ng-click="$ctrl.unarchive(ab);" ng-if="ab.archived">
+                        <md-icon md-svg-icon="unarchive" aria-label="{{::('common.unarchive' | translate)}}"></md-icon>
+                        <md-tooltip><span translate>common.unarchive</span></md-tooltip>
+                    </md-button>
+                </div>
+            </md-card-title-text>
+		</md-card-title>
+		<form role="form" ng-submit="$ctrl.update(itemToUpdate); preview = false"
+				ng-init="itemToUpdate = {shortName: ab.shortName, name: ab.name, description: ab.description, archived: ab.archived}; $ctrl.view.boardStatus[ab.shortName].preview = false">
+			<md-card-content>
+				<div ng-class="{archived : ab.archived}" ng-if="!edit">
+					<p ng-if="ab.description.length > 0" ng-bind-html="ab.description | markdown"></p>
+					<p ng-if="ab.description == null || ab.description.length == 0"><em translate>common.no-description</em></p>
+				</div>
+				<div ng-if="edit">
+					<md-input-container class="md-block">
+						<label for="name" data-translate>label.name</label>
+						<input type="text" id="name" placeholder="" required="required" autocomplete="off" data-ng-model="itemToUpdate.name">
+					</md-input-container>
+					<md-input-container class="md-block" ng-if="!preview">
+						<label data-translate>label.description</label>
+						<textarea data-ng-model="itemToUpdate.description" rows="5"></textarea>
+					</md-input-container>
+					<md-input-container class="md-block md-input-has-value" ng-if="preview">
+					   <label data-translate>label.description</label>
+                        <div data-ng-bind-html="itemToUpdate.description | markdown"></div>
+                    </md-input-container>
+				</div>
+			</md-card-content>
+			<md-card-actions ng-show="edit" class="row margin-8">
+				<md-button type="submit" class="md-primary"><span translate>button.update</span></md-button>
+				<md-button ng-click="preview = true" ng-hide="preview"><span translate>button.preview</span></md-button>
+				<md-button ng-click="preview = false" ng-show="preview"><span translate>button.closePreview</md-button>
+				<md-button ng-click="edit = false;preview = false"><span translate>button.cancel</span></md-button>
+			</md-card-actions>
+		</form>
+	</md-card>
+</div>

@@ -1,0 +1,131 @@
+<md-card>
+    <md-card-title>
+        <div class="flex-width" data-ng-hide="editCardName">
+            <md-card-title-text>
+                <div class="md-headline overflow-break" data-lvg-has-permission="UPDATE_CARD" data-ng-bind="$ctrl.card.name"
+                      data-ng-click="cardNameToEdit = $ctrl.card.name; editCardName=true"></div>
+                <div class="md-headline overflow-break" data-lvg-has-not-permission="UPDATE_CARD" data-ng-bind="$ctrl.card.name"></div>
+            </md-card-title-text>
+        </div>
+        <div class="lavagna-card-title-main" data-ng-show="editCardName">
+            <form class="row row-inherit" data-ng-role="form" data-ng-submit="$ctrl.updateCardName(cardNameToEdit); editCardName=false">
+                <div class="flex">
+                    <md-input-container md-no-float class="lvg-input-container__inline">
+                        <input required ng-model="cardNameToEdit" lvg-focus-on="editCardName" lvg-on-esc="editCardName=false">
+                    </md-input-container>
+                </div>
+                <div class="flex no-grow">
+                    <md-button class="lvg-small-icon-button" type="submit" ng-disabled="!cardNameToEdit">
+                        <md-icon md-svg-icon="ok"></md-icon>
+                    </md-button>
+                </div>
+                <div class="flex no-grow">
+                    <md-button class="lvg-small-icon-button" ng-click="editCardName=false">
+                        <md-icon md-svg-icon="close"></md-icon>
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </md-card-title>
+    <md-card-content>
+        <div>
+            <lvg-card-labels
+                card="$ctrl.card"
+                project="$ctrl.project"
+                label-values="$ctrl.labelValues"
+                on-remove="$ctrl.removeLabelValue($label, $labelValue)"
+                ng-if="$ctrl.hasUserLabels()"></lvg-card-labels>
+            <span class="lvg-card-description__no-label" ng-if="!$ctrl.hasUserLabels()" data-ng-hide="$ctrl.addLabelPanel" translate>card.labels.no.labels</span>
+            <span class="lvg-card-description-labels-add" data-lvg-has-permission="MANAGE_LABEL_VALUE" data-ng-hide="$ctrl.addLabelPanel">
+                <md-button data-ng-click="$ctrl.addLabelPanel = true"
+                           md-no-ink
+                           class="lvg-small-icon-button lvg-card-description__labels-add-button">
+                    <md-tooltip><span translate>card.labels.add.tooltip</span></md-tooltip>
+                    <md-icon md-menu-origin md-svg-icon="add"></md-icon>
+                </md-button>
+            </span>
+        </div>
+        <lvg-card-labels-add data-ng-show="$ctrl.addLabelPanel"
+                             on-cancel-add="$ctrl.hideAddPanel()"
+                             on-add="$ctrl.addLabel($label)"
+                             project-short-name="$ctrl.project.shortName"
+                             user-labels="$ctrl.project.metadata.userLabels"
+                             label-values="$ctrl.labelValues"></lvg-card-labels-add>
+        <md-divider class="lvg-card-description__divider"></md-divider>
+        <div data-ng-if="$ctrl.editDescription">
+            <form
+                data-ng-submit="$ctrl.editDescription = false; $ctrl.editDescriptionPreviewMode = false; $ctrl.updateDescription($ctrl.descriptionToEdit);">
+                <div ng-hide="$ctrl.editDescriptionPreviewMode">
+                    <md-input-container class="md-block">
+                        <label translate>label.description</label>
+                        <textarea class="lvg-card-description__textarea"
+                                  ng-model="$ctrl.descriptionToEdit"
+                                  rows="3"
+                                  lvg-focus-on="$ctrl.editDescription"
+                                  lvg-on-esc="$ctrl.editDescriptionPreviewMode = false; $ctrl.editDescription = false"></textarea>
+                    </md-input-container>
+                </div>
+                <div data-ng-show="$ctrl.editDescriptionPreviewMode"
+                     data-ng-bind-html="$ctrl.descriptionToEditPreview | markdown"></div>
+                <div>
+                    <md-button class="md-primary" type="submit">
+                        <span data-translate>button.update</span>
+                    </md-button>
+                    <md-button data-ng-hide="$ctrl.editDescriptionPreviewMode"
+                               data-ng-click="$ctrl.descriptionToEditPreview = $ctrl.descriptionToEdit; $ctrl.editDescriptionPreviewMode = true" type="button">
+                        <span data-translate>button.preview</span>
+                    </md-button>
+                    <md-button data-ng-show="$ctrl.editDescriptionPreviewMode"
+                               data-ng-click="$ctrl.editDescriptionPreviewMode = false" type="button">
+                        <span data-translate>button.closePreview</span>
+                    </md-button>
+                    <md-button data-ng-click="$ctrl.editDescriptionPreviewMode = false; $ctrl.editDescription = false" type="button">
+                        <span data-translate>button.cancel</span>
+                    </md-button>
+                </div>
+            </form>
+        </div>
+
+        <div data-ng-if="!$ctrl.editDescription">
+            <div class="lvg-card-description__content"
+                 data-ng-bind-html="$ctrl.description.content | markdown">
+            </div>
+            <div class="lvg-card-description__footer">
+                <div class="lvg-card-description__updated" ng-if="$ctrl.description">
+                    <div data-ng-show="$ctrl.description.updatedCount == 0">
+                        <span data-translate>card.description.created.by</span>
+                        <lvg-user-link  class="lvg-card-description__updated_user" user-id="$ctrl.description.updateUser"></lvg-user-link>
+                        <span data-translate>common.on</span>
+                        <span class="lvg-card-description__updated_date" data-ng-bind="$ctrl.description.updateDate | dateIncremental"></span>
+                    </div>
+                    <div data-ng-show="$ctrl.description.updatedCount == 1">
+                        <span data-translate>card.description.update.count</span>
+                        -
+                        <span data-translate>card.description.updated.by</span>
+                        <lvg-user-link class="lvg-card-description__updated_user" user-id="$ctrl.description.updateUser"></lvg-user-link>
+                        <span data-translate>common.on</span>
+                        <span class="lvg-card-description__updated_date" data-ng-bind="$ctrl.description.updateDate | dateIncremental"></span>
+                    </div>
+                    <div data-ng-show="$ctrl.description.updatedCount > 1">
+                        <span data-translate data-translate-value-count="{{$ctrl.description.updatedCount}}">card.description.update.counts</span>
+                        -
+                        <span data-translate>card.description.updated.by</span>
+                        <lvg-user-link class="lvg-card-description__updated_user" user-id="$ctrl.description.updateUser"></lvg-user-link>
+                        <span data-translate>common.on</span>
+                        <span class="lvg-card-description__updated_date" data-ng-bind="$ctrl.description.updateDate | dateIncremental"></span>
+                    </div>
+                </div>
+                <div class="lvg-card-description__updated" ng-if="!$ctrl.description">
+                    <span data-translate>card.description.not.available</span>
+                </div>
+                <div class="lvg-card-description__edit-button">
+                    <md-button ng-click="$ctrl.descriptionToEdit = $ctrl.description.content; $ctrl.editDescription = true;"
+                               class="lvg-small-icon-button" data-lvg-has-permission="UPDATE_CARD">
+                        <md-tooltip><span translate>card.description.edit.tooltip</span></md-tooltip>
+                        <md-icon md-svg-icon="edit"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>

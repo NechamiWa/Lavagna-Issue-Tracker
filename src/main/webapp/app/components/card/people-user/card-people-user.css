@@ -1,0 +1,11 @@
+.lvg-card-people-user > div {
+    display: inline-block;
+}
+
+.lvg-card-people-user__link {
+    font-size: 1.05rem;
+}
+
+.lvg-card-people-user__avatar {
+    margin-right: 15px;
+}

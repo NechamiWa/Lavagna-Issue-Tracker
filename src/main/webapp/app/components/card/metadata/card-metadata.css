@@ -1,0 +1,66 @@
+.lvg-card-metadata__title {
+    font-weight: bold;
+}
+
+.lvg-card-metadata__item {
+    margin-top:10px;
+    min-height: 40px;
+}
+
+.lvg-card-metadata__item:first-child {
+    margin-top:0;
+}
+
+.lvg-card-metadata__item .md-icon-button {
+    margin: 0;
+}
+
+.lvg-card-metadata__status {
+    display: inline-block;
+    padding: 8px 2px 4px 2px;
+}
+
+.lvg-card-metadata__md-select md-option {
+    padding-left: 15px;
+    padding-right: 0px;
+}
+
+.lvg-card-metadata__item-name {
+    color: #aaaaaa;
+}
+
+.lvg-card-metadata__item-text {
+    min-height: 30px;
+    height: 30px;
+}
+
+.lvg-card-metadata__item-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.lvg-card-metadata__item-status-select md-select-value {
+    text-align: center;
+    padding: 2px 2px 1px 32px;
+}
+
+.lvg-card-metadata__item-status-select[disabled="disabled"] md-select-value {
+    color: inherit !important;
+}
+
+.lvg-card-metadata__item-status-select[disabled="disabled"] .md-select-icon {
+    visibility: hidden !important;
+}
+
+.lvg-card-metadata__item md-select {
+    margin: 0 !important;
+}
+
+.lvg-card-metadata__milestone-closed {
+    color: #e5e5e5;
+}
+
+.lvg-card-metadata__milestone-search {
+    height: 30px;
+    min-height: 30px;
+}

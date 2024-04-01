@@ -1,0 +1,30 @@
+<form name="checkLdapForm" ng-submit="$ctrl.checkLdapConfiguration($ctrl.checkLdap)">
+	<md-dialog-content class="md-dialog-content">
+        <h2 class="md-title" translate>admin.login.ldap.checkConfiguration</h2>
+
+        <md-input-container class="md-block">
+            <label data-translate>admin.login.ldap.username</label>
+            <input type="text" ng-model="$ctrl.checkLdap.username" required md-autofocus>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label translate>admin.login.ldap.password</label>
+            <input type="password" ng-model="$ctrl.checkLdap.password" id="checkLdap.password" required>
+        </md-input-container>
+
+
+        <div ng-if="$ctrl.ldapCheckResult">
+            <span ng-if="$ctrl.ldapCheckResult.first" translate>admin.login.ldap.allOk</span>
+            <span ng-if="!$ctrl.ldapCheckResult.first" translate>admin.login.ldap.error</span>
+            <ul>
+                <li ng-repeat="msg in $ctrl.ldapCheckResult.second"><pre ng-bind="msg"></pre></li>
+            </ul>
+        </div>
+
+	</md-dialog-content>
+
+	<md-dialog-actions>
+	    <md-button ng-click="$ctrl.close()"><span translate>button.cancel</span></md-button>
+	    <md-button type="submit" ng-disabled="!checkLdapForm.$valid"><span translate>admin.login.ldap.check</span></md-button>
+	</md-dialog-actions>
+</form>

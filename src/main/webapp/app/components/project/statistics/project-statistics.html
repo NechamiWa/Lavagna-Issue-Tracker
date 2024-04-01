@@ -1,0 +1,162 @@
+<div class="lvg-content">
+    <div class="row row-inherit lvg-content__row">
+        <div class="lvg-content__row-item col-md-3 col-xs-6">
+            <md-input-container class="lvg-project-statistics__filter">
+                <label translate>project.statistics.filter.by.board</label>
+                <md-select data-ng-model="$ctrl.boardToFilter"
+                           data-ng-change="$ctrl.filterByBoard($ctrl.boardToFilter)">
+                    <md-option ng-value="board" ng-repeat="board in $ctrl.boards | filter:{archived: false}">{{::board.name}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-6">
+            <md-input-container class="lvg-project-statistics__filter">
+                <label translate>project.statistics.filter.by.date.range</label>
+                <md-select data-ng-model="$ctrl.dateRange"
+                           data-ng-change="$ctrl.changeDateRange($ctrl.dateRange)">
+                    <md-option ng-value="date" ng-repeat="date in $ctrl.availableDateRanges">{{::date.name}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row">
+        <div class="lvg-content__row-item col-xs-12" data-ng-class="{'col-md-6': $ctrl.stats.mostActiveCard == null, 'col-md-3': $ctrl.stats.mostActiveCard}">
+            <lvg-stats-tile tile-title="'project.statistics.created.this.period'|translate"
+                            value="$ctrl.openedThisPeriod" value-color="$ctrl.stats.openTaskColor">
+            </lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-xs-12" data-ng-class="{'col-md-6': $ctrl.stats.mostActiveCard == null, 'col-md-3': $ctrl.stats.mostActiveCard}">
+            <lvg-stats-tile tile-title="'project.statistics.closed.this.period'|translate"
+                            value="$ctrl.closedThisPeriod" value-color="$ctrl.stats.closedTaskColor">
+            </lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-6 col-xs-12" data-ng-if="$ctrl.stats.mostActiveCard">
+            <div class="lvg-panel">
+                <div class="lvg-stats-tile__title">
+                    <h4 data-translate>project.statistics.most.active.card</h4>
+                </div>
+                <div class="lvg-stats-tile__value lvg-stats-tile__value-most-active">
+                    <a ui-sref="board.card({projectName: $ctrl.stats.mostActiveCard.projectShortName, shortName: $ctrl.stats.mostActiveCard.boardShortName, seqNr: $ctrl.stats.mostActiveCard.sequence})"
+                       data-ng-class="{'lavagna-closed-card':$ctrl.stats.mostActiveCard.columnDefinition == 'CLOSED'}">
+                        <span>{{$ctrl.stats.mostActiveCard.boardShortName}}-{{$ctrl.stats.mostActiveCard.sequence}}</span>
+                    </a>
+                </div>
+                <div class="lvg-stats-tile__subtitle"><h5>{{$ctrl.stats.mostActiveCard.name}}</h5></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row" data-ng-if="$ctrl.showCreatedAndClosedCards">
+        <div class="lvg-content__row-item col-xs-12">
+            <div class="lvg-panel">
+                <div class="lvg-panel__head">
+                    <div class="lvg-stats-tile__title">
+                        <h4 class="lvg-stats-tile__title-chart-header">
+                            <span data-translate>project.statistics.created.closed.cards</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="lvg-panel__body">
+                    <div>
+                        <lvg-stats-chart chart-data="$ctrl.stats.createdAndClosedCards"></lvg-stats-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row">
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'common.column.definition.OPEN'|translate"
+                            value="$ctrl.stats.openTaskCount" value-color="$ctrl.stats.openTaskColor"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'common.column.definition.CLOSED'|translate"
+                            value="$ctrl.stats.closedTaskCount" value-color="$ctrl.stats.closedTaskColor"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'common.column.definition.DEFERRED'|translate"
+                            value="$ctrl.stats.deferredTaskCount" value-color="$ctrl.stats.deferredTaskColor"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'common.column.definition.BACKLOG'|translate"
+                            value="$ctrl.stats.backlogTaskCount" value-color="$ctrl.stats.backlogTaskColor"></lvg-stats-tile>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row" data-ng-if="$ctrl.showCardsHistory">
+        <div class="lvg-content__row-item col-xs-12">
+            <div class="lvg-panel">
+                <div class="lvg-panel__head">
+                    <div class="lvg-stats-tile__title">
+                        <h4 class="lvg-stats-tile__title-chart-header">
+                            <span data-translate>project.statistics.cards.history</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="lvg-panel__body">
+                    <div>
+                        <lvg-chart type="Line" data="$ctrl.chartCardsHistoryData" height="220"
+                                   options="$ctrl.cardsHistoryChartOptions"
+                                   class="img-responsive"></lvg-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row">
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'project.statistics.total.cards'|translate"
+                            value="$ctrl.totalCards"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'project.statistics.active.users'|translate"
+                            value="$ctrl.stats.activeUsers"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'project.statistics.average.cards.user'|translate"
+                            value="$ctrl.stats.averageCardsPerUser|number:2"></lvg-stats-tile>
+        </div>
+        <div class="lvg-content__row-item col-md-3 col-xs-12">
+            <lvg-stats-tile tile-title="'project.statistics.average.users.card'|translate"
+                            value="$ctrl.stats.averageUsersPerCard|number:2"></lvg-stats-tile>
+        </div>
+    </div>
+
+    <div class="row row-inherit lvg-content__row" data-ng-if="$ctrl.showCardsByLabel">
+        <div class="lvg-content__row-item col-xs-12">
+            <div class="lvg-panel">
+                <div class="lvg-panel__head">
+                    <div class="lvg-stats-tile__title">
+                        <h4 class="lvg-stats-tile__title-chart-header">
+                            <span data-translate>project.statistics.cards.by.label</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="lvg-panel__body">
+                    <div>
+                        <div>
+                            <table class="lvg-bar-chart" ng-if="$ctrl.metadata">
+                                <tr data-ng-repeat="label in $ctrl.stats.cardsByLabel">
+                                    <td class="text">
+                                        <lvg-label-v2 value-ref="label" project-metadata-ref="$ctrl.metadata"></lvg-label-v2>
+                                    </td>
+                                    <td class="bar">
+                                        <div class="inner-bar"
+                                             data-ng-style="::(label|labelChartBar: $ctrl.cardsByLabelMax)"
+                                             data-ng-class="::(label.labelColor|labelBackgroundClass)" ng-bind="::label.count">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-ui-view data-autoscroll="false"></div>

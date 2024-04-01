@@ -1,0 +1,64 @@
+<ul class="lvg-card-fragment-v2-menu__button_list" ng-hide="$ctrl.moveColumnFlag || $ctrl.cloneCardFlag" role="menu" ng-keydown="$ctrl.handleKey($event)">
+    <li ng-if="$ctrl.permissions['MOVE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.moveColumnFlag = true;" role="menuitem" translate>card-fragment.menu.moveToColumn</button>
+    </li>
+    <li ng-if="$ctrl.permissions['CREATE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.cloneCardFlag = true;" role="menuitem" translate>card-fragment.menu.clone</button>
+    </li>
+    <li ng-if="$ctrl.permissions['MOVE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.moveCard('ARCHIVE'); $ctrl.close();" role="menuitem" translate>card-fragment.menu.moveToArchive</button>
+    </li>
+    <li ng-if="$ctrl.permissions['MOVE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.moveCard('BACKLOG'); $ctrl.close();" role="menuitem" translate>card-fragment.menu.moveToBacklog</button>
+    </li>
+    <li ng-if="$ctrl.permissions['MOVE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.moveCard('TRASH'); $ctrl.close();" role="menuitem" translate>card-fragment.menu.moveToTrash</button>
+    </li>
+    <li ng-if="!$ctrl.isSelfWatching && $ctrl.permissions['UPDATE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.watchCard(); $ctrl.close();" role="menuitem" translate>card-fragment.menu.watch</button>
+    </li>
+    <li ng-if="$ctrl.isSelfWatching && $ctrl.permissions['UPDATE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.unWatchCard(); $ctrl.close();" role="menuitem" translate>card-fragment.menu.unwatch</button>
+    </li>
+    <li ng-if="!$ctrl.isAssignedToCard && $ctrl.permissions['UPDATE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.assignToCurrentUser(); $ctrl.close();" role="menuitem" translate>card-fragment.menu.take</button>
+    </li>
+    <li ng-if="$ctrl.isAssignedToCard && $ctrl.permissions['UPDATE_CARD']">
+        <button ng-init="$ctrl.buttonVisibility()" class="lvg-card-fragment-v2-menu__button" ng-click="$ctrl.removeAssignForCurrentUser(); $ctrl.close();" role="menuitem" translate>card-fragment.menu.surrender</button>
+    </li>
+</ul>
+<div ng-if="$ctrl.cloneCardFlag">
+    <md-dialog class="md-transition-in">
+        <form ng-submit="$ctrl.cloneCard(toColumn)">
+            <md-dialog-content class="md-dialog-content">
+                <md-select ng-model="toColumn" required class="lvg-card-fragment-v2-menu__select" lvg-focus-on="$ctrl.cloneCardFlag">
+                    <md-optgroup label="{{::columnByProject[0].board}}" ng-repeat="columnByProject in $ctrl.columnsByProject">
+                        <md-option ng-value="opt" ng-repeat="opt in columnByProject">{{::opt.columnName}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-dialog-content>
+            <md-dialog-actions>
+               <md-button type="button" ng-click="$ctrl.cloneCardFlag = false"><span translate>button.cancel</span></md-button>
+               <md-button type="submit" ng-disabled="toColumn === null || toColumn === undefined"><span translate>card-fragment.menu.clone</span></md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</div>
+<div ng-if="$ctrl.moveColumnFlag">
+    <md-dialog class="md-transition-in">
+        <form ng-submit="$ctrl.moveToColumn(toColumn)">
+		    <md-dialog-content class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label translate>label.column</label>
+                    <md-select ng-model="toColumn" required class="lvg-card-fragment-v2-menu__select" lvg-focus-on="$ctrl.moveColumnFlag">
+                        <md-option ng-value="opt" ng-repeat="opt in $ctrl.moveColumns">{{::opt.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+	        </md-dialog-content>
+		    <md-dialog-actions>
+		       <md-button type="button" ng-click="$ctrl.moveColumnFlag=false"><span translate>button.cancel</span></md-button>
+		       <md-button type="submit" ng-disabled="toColumn === null || toColumn === undefined"><span translate>button.move</span></md-button>
+		    </md-dialog-actions>
+	    </form>
+    </md-dialog>
+</div>

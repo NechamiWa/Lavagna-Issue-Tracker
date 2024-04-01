@@ -1,0 +1,99 @@
+.icon {
+    outline: 0;
+    border: none;
+    display: inline-block;
+    background-size: 18px 18px;
+    height: 18px;
+    min-width: 0;
+    line-height: 18px;
+    width: 18px;
+}
+
+.icon-add-column {
+    background-image: url(../svg/add_column.svg);
+}
+
+.icon-more-vert {
+    background-image: url(../svg/more_vert.svg);
+}
+
+.icon-board-backlog {
+    background-image: url(../svg/board-backlog.svg);
+}
+
+.icon-board-archive {
+    background-image: url(../svg/board-archive.svg);
+}
+
+.icon-board-trash {
+    background-image: url(../svg/board-trash.svg);
+}
+
+.icon-add-card {
+    background-image: url(../svg/add_card.svg);
+}
+
+.icon-drag {
+    background-image: url(../svg/drag.svg);
+}
+
+.icon-edit {
+    background-image: url(../svg/edit.svg);
+}
+
+.icon-info {
+    background-image: url(../svg/info.svg);
+}
+
+.icon-password {
+    background-image: url(../svg/password.svg);
+}
+
+.icon-delete {
+    background-image: url(../svg/delete.svg);
+}
+
+.icon-milestone-open {
+    background-image: url(../svg/milestone-open.svg);
+}
+
+.icon-calendar {
+    background-image: url(../svg/calendar.svg);
+}
+
+.icon-enable-ticket {
+    background-image: url(../svg/repeat.svg);
+}
+
+.icon-disable-ticket {
+    background-image: url(../svg/repeat-off.svg);
+}
+
+.icon-bulk-select {
+    background-image: url(../svg/bulk-select.svg);
+}
+
+.icon-bulk-move {
+    background-image: url(../svg/bulk-move.svg);
+}
+
+.icon-bulk-assign {
+    background-image: url(../svg/bulk-assign.svg);
+}
+
+.icon-bulk-milestone {
+    background-image: url(../svg/bulk-milestone.svg);
+}
+
+.icon-bulk-label {
+    background-image: url(../svg/bulk-label.svg);
+}
+
+
+.icon-enable-sync {
+    background-image: url(../svg/ic_sync_black_48px.svg);
+}
+
+.icon-disable-sync {
+    background-image: url(../svg/ic_sync_disabled_black_48px.svg);
+}

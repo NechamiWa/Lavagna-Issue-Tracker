@@ -1,0 +1,88 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <div class="row row-inherit">
+                <div class="lvg-headline"><span data-translate>card.people</span></div>
+                <span class="flex"></span>
+                <md-button data-lvg-has-permission="UPDATE_CARD" ng-if="!$ctrl.isAssigned()" class="lvg-small-icon-button" ng-click="$ctrl.take()">
+                    <md-tooltip><span translate>card.people.take</span></md-tooltip>
+                    <md-icon md-svg-icon="take"></md-icon>
+                </md-button>
+                <md-button data-lvg-has-permission="UPDATE_CARD" ng-if="$ctrl.isAssigned()" class="lvg-small-icon-button" ng-click="$ctrl.surrender()">
+                    <md-tooltip><span translate>card.people.surrender</span></md-tooltip>
+                    <md-icon md-svg-icon="surrender"></md-icon>
+                </md-button>
+                <md-button data-lvg-has-permission="UPDATE_CARD" ng-if="!$ctrl.isWatching()" class="lvg-small-icon-button" ng-click="$ctrl.watchCard()">
+                    <md-tooltip><span translate>card.people.watch</span></md-tooltip>
+                    <md-icon md-svg-icon="notifications"></md-icon>
+                </md-button>
+                <md-button data-lvg-has-permission="UPDATE_CARD" ng-if="$ctrl.isWatching()" class="lvg-small-icon-button" ng-click="$ctrl.unWatchCard()">
+                    <md-tooltip><span translate>card.people.unwatch</span></md-tooltip>
+                    <md-icon md-svg-icon="notifications-off"></md-icon>
+                </md-button>
+            </div>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <div class="lvg-card-people__assigned">
+            <div ng-repeat="user in $ctrl.assignedUsers"
+                 class="row row-inherit start-xs middle-xs lvg-card-people__user">
+                <lvg-card-people-user user-id="user.value.valueUser" class="flex"></lvg-card-people-user>
+                <md-button class="lvg-small-icon-button flex no-grow" data-lvg-has-permission="UPDATE_CARD" ng-click="$ctrl.removeAssignForUser(user);">
+                    <md-tooltip><span translate>card.people.unassign</span></md-tooltip>
+                    <md-icon md-svg-icon="close"></md-icon>
+                </md-button>
+            </div>
+            <div ng-if="$ctrl.assignedUsers.length === 0"><i class="lvg-card-people__no-user" data-translate>card.people.assignedToNone</i></div>
+        </div>
+        <div class="lvg-card-people__watching" ng-if="$ctrl.watchingUsers">
+            <md-divider></md-divider>
+            <div class="lvg-card-people__watching-count"
+                 ng-class="{'italic': $ctrl.watchingUsers.length === 0}">
+                <ng-pluralize class="lvg-card-people__watching-count" count="$ctrl.watchingUsers.length"
+                              when="{
+                     '0': ('card.people.watchedByNone'|translate),
+                     '1': ('card.people.watchedByOne'|translate),
+                     'other': ('card.people.watchedByMany' | translate:{count: '{{$ctrl.watchingUsers.length}}'})}">
+                </ng-pluralize>
+                <md-button ng-hide="watchExpanded || $ctrl.watchingUsers.length === 0" class="lvg-small-icon-button" ng-click="watchExpanded = true;">
+                    <md-tooltip><span translate>card.people.showWatchedUsers</span></md-tooltip>
+                    <md-icon md-svg-icon="expand_more"></md-icon>
+                </md-button>
+                <md-button ng-show="watchExpanded" class="lvg-small-icon-button" ng-click="watchExpanded = false;">
+                    <md-tooltip><span translate>card.people.hideWatchedUsers</span></md-tooltip>
+                    <md-icon md-svg-icon="expand_less"></md-icon>
+                </md-button>
+            </div>
+            <div ng-if="watchExpanded">
+                <div ng-repeat="user in $ctrl.watchingUsers"
+                     class="row row-inherit start-xs middle-xs lvg-card-people__user">
+                    <lvg-card-people-user user-id="user.value.valueUser" class="flex"></lvg-card-people-user>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions data-lvg-has-permission="UPDATE_CARD" class="lvg-card-people__actions">
+        <form data-ng-submit="$ctrl.assignUser(user); user = null;">
+            <div class="row margin-8 start-xs bottom-xs">
+                <div class="flex">
+                    <md-autocomplete
+                        md-no-cache="true"
+                        md-selected-item="user"
+                        md-search-text="userSearchText"
+                        md-item-text="user.label"
+                        md-items="user in $ctrl.searchUser(userSearchText)"
+                        md-floating-label="{{'label.user'|translate}}"
+                        class="lvg-autocomplete__inline flex">
+                        <md-item-template>{{user.label}}</md-item-template>
+                    </md-autocomplete>
+                </div>
+                <div class="flex no-grow">
+                    <md-button class="md-primary" type="submit" ng-disabled="!user">
+                        <span data-translate>button.assign</span>
+                    </md-button>
+                </div>
+            </div>
+        </form>
+    </md-card-actions>
+</md-card>

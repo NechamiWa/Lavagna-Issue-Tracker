@@ -1,0 +1,261 @@
+/**/
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(../fonts/Roboto-Thin.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(../fonts/Roboto-Light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(../fonts/Roboto-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(../fonts/Roboto-Medium.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/Roboto-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(../fonts/Roboto-LightItalic.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'), local('Roboto-Italic'), url(../fonts/Roboto-Italic.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Mono Light'), local('RobotoMono-Light'), url(../fonts/RobotoMono-Light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Mono'), local('RobotoMono-Regular'), url(../fonts/RobotoMono-Regular.woff) format('woff');
+}
+/**/
+
+html, body {
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	background-color: #e5e5e5;
+	color: #333333;
+	font-size: 14px;
+}
+
+a,
+a:link,
+a:hover,
+a:focus,
+a:visited,
+a:active {
+    color: #428bca;
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    color: #2a6496;
+    text-decoration: underline;
+}
+
+/*
+
+ Define various max-size for the content.
+
+*/
+
+.lvg-component--sticky-header {
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lvg-container--scrollable {
+    display: flex;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.lvg-content {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.lvg-content__row-item {
+    margin-top: 20px;
+}
+
+.lvg-content__row:last-child {
+    margin-bottom: 20px;
+}
+
+.lvg-manage-dialog {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 50%;
+    flex: 1 1 50%;
+    max-width: 50%;
+    max-height: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .lvg-manage-dialog {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 100%;
+        flex: 1 1 100%;
+        max-width: 100%;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 992px) {
+    .lvg-manage-dialog {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 66.66%;
+        flex: 1 1 66.66%;
+        max-width: 66.66%;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+
+    .lvg-content {
+        width: 950px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .lvg-content {
+        width: 1170px;
+    }
+}
+
+/*
+
+ Remove some flexboxgrid weird behaviour
+
+*/
+
+.row-inherit, column-inherit {
+    margin-right: inherit !important;
+    margin-left: inherit !important;
+}
+
+/*
+
+ Helper classes
+
+*/
+
+.flex-width {
+    min-width: 0;
+    width: 100%;
+}
+
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.overflow-break {
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-12 {
+    padding: 12px;
+}
+
+.margin-8 {
+    margin: 8px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-12 {
+    margin: 12px;
+}
+
+.lvg-divider-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lvg-divider-15 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.lvg-divider-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.lvg-main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height:0;
+    flex:1;
+}
+
+.flex {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.column {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.no-grow {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+    box-sizing: border-box;
+}

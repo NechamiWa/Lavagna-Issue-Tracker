@@ -1,0 +1,53 @@
+<div class="row row-inherit" data-ng-switch="$ctrl.label.type">
+	<div data-ng-switch-when="NULL" class="flex"></div>
+	<div data-ng-switch-when="STRING" class="flex">
+        <md-input-container class="md-block">
+            <input type="text" placeholder="{{'label.picker.value'|translate}}" data-ng-model="$ctrl.model" required>
+        </md-input-container>
+    </div>
+	<div data-ng-switch-when="INT" class="flex">
+        <md-input-container class="md-block">
+            <input type="number" placeholder="{{'label.picker.value'|translate}}" data-ng-model="$ctrl.model" required>
+        </md-input-container>
+    </div>
+	<div data-ng-switch-when="TIMESTAMP" class="flex">
+        <md-datepicker ng-model="$ctrl.model" required></md-datepicker>
+    </div>
+	<div data-ng-switch-when="CARD" class="flex">
+        <md-input-container class="md-block">
+           <md-autocomplete
+               required
+               md-floating-label="{{'label.picker.card'|translate}}"
+               md-no-cache="true"
+               md-selected-item="$ctrl.model"
+               md-search-text="cardSearchText"
+               md-item-text="card.label"
+               md-items="card in $ctrl.searchCard(cardSearchText)">
+               <md-item-template>{{card.label}}</md-item-template>
+            </md-autocomplete>
+        </md-input-container>
+    </div>
+	<div data-ng-switch-when="USER" class="flex">
+        <md-input-container class="md-block">
+           <md-autocomplete
+               required
+               md-floating-label="{{'label.picker.user'|translate}}"
+               md-no-cache="true"
+               md-selected-item="$ctrl.model"
+               md-search-text="userSearchText"
+               md-item-text="user.label"
+               md-items="user in $ctrl.searchUser(userSearchText)">
+               <md-item-template>{{user.label}}</md-item-template>
+           </md-autocomplete>
+        </md-input-container>
+    </div>
+	<div data-ng-switch-when="LIST" class="flex">
+        <md-input-container class="md-block">
+            <md-select ng-model="$ctrl.model" required>
+                <md-option ng-value="item" ng-repeat="item in $ctrl.listValues">
+                    {{item.value}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+	</div>
+</div>

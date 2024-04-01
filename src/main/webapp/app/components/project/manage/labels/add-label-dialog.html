@@ -1,0 +1,39 @@
+<form name="addLabelForm"
+      data-ng-init="labelToAdd = {type: 'NULL', color: '#3f51b5', unique: true}"
+      data-ng-submit="ctrl.add(labelToAdd);">
+    <md-dialog-content class="md-dialog-content">
+        <h2 class="md-title" translate>project.manage.labels.dialog.create</h2>
+        <md-input-container class="md-block">
+            <label translate>label.name</label>
+            <input ng-model="labelToAdd.name" required md-autofocus>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>label.type</label>
+            <md-select ng-model="labelToAdd.type" required>
+                <md-option value="{{::l.type}}" ng-repeat="l in ctrl.labelOptions">{{::l.name}}</md-option>
+            </md-select>
+        </md-input-container>
+        <div class="row row-inherit">
+            <div class="flex">
+                <md-input-container class="lvg-input-container__inline">
+                    <label translate>label.color</label>
+                    <input lvg-validator-hex-color ng-model="labelToAdd.color" required>
+                </md-input-container>
+            </div>
+            <div class="flex no-grow lvg-project-manage-labels__color-picker">
+                <lvg-color-picker-v2 ng-model="labelToAdd.color"></lvg-color-picker-v2>
+            </div>
+        </div>
+        <md-input-container class="md-block">
+            <md-checkbox ng-model="labelToAdd.unique"><span data-translate>project.manage.labels.unique</span></md-checkbox>
+        </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button type="button" data-ng-click="ctrl.close();">
+            <span data-translate>button.cancel</span>
+        </md-button>
+        <md-button type="submit" data-ng-disabled="!addLabelForm.$valid">
+            <span data-translate>button.create</span>
+        </md-button>
+    </md-dialog-actions>
+</form>

@@ -1,0 +1,38 @@
+<div class="lvg-board-sidebar__container"
+     data-lvg-update-sidebar-size
+     data-lvg-update-sidebar-size-trigger="{{$ctrl.sidebar.hasMore}}">
+    <div ng-if="$ctrl.dragFromBoard"
+         class="lvg-board-sidebar__dropzone"
+         lvg-dnd
+         lvg-dnd-permission="MOVE_CARD"
+         lvg-dnd-drop="$ctrl.dropCard()"
+         lvg-dnd-opts="{sort:false, group: 'card', animation: 150}"></div>
+    <div class="lvg-board-sidebar__header">
+        <div class="lvg-board-sidebar__header-title">{{'common.location.definition.' + $ctrl.sideBarLocation | translate}}</div>
+    </div>
+    <div class="lvg-board-sidebar__content">
+        <md-progress-circular md-mode="indeterminate" ng-hide="$ctrl.sidebarLoaded"></md-progress-circular>
+        <lvg-rebuild-if-change to-watch="$ctrl.metadataRef().hash"
+                               lvg-dnd="$ctrl.sidebar.cards"
+                               lvg-dnd-opts="{sort:false, group: 'card', animation: 150}"
+                               lvg-dnd-dragstart="$ctrl.dragStartCard($item)">
+            <lvg-card-fragment-v2
+                tabindex="0"
+                ng-repeat="card in $ctrl.sidebar.cards track by (card.hash+$ctrl.metadataRef().hash)"
+                view="board"
+                hide-select="true"
+                card-ref="card"
+                user-ref="$ctrl.user"
+                project-metadata-ref="$ctrl.metadataRef()"></lvg-card-fragment-v2>
+        </lvg-rebuild-if-change>
+    </div>
+    <div class="lvg-board-sidebar__footer row row-inherit middle-xs between-xs" data-ng-show="$ctrl.sidebar.currentPage !== 0 || $ctrl.sidebar.hasMore">
+        <div>
+            <md-button ng-if="$ctrl.sidebar.currentPage !== 0" ng-click="$ctrl.prevPage()"><span translate>button.newer</span></md-button>
+        </div>
+        <div>
+            <md-button ng-if="$ctrl.sidebar.hasMore" ng-click="$ctrl.nextPage()"><span translate>button.older</span></md-button>
+        </div>
+    </div>
+</div>
+

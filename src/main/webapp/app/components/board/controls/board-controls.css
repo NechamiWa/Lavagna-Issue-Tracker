@@ -1,0 +1,29 @@
+.lvg-board-controls {
+    display: flex;
+    height: 100%;
+    min-height: 100%;
+    max-width: 55px;
+}
+
+.lvg-board-controls__container {
+    padding-top: 4px;
+}
+
+.lvg-board-controls__container-divider {
+    margin: 9px 5px 10px 5px;
+    border-top: 1px solid #aaa
+}
+
+.lvg-board-controls__location-active {
+    background-color: #aaa;
+}
+
+.lvg-board-controls__action-icons {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.lvg-board-controls__inner-menu {
+    padding: 0;
+}

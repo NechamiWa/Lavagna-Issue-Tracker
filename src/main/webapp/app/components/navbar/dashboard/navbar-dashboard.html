@@ -1,0 +1,16 @@
+<md-toolbar class="lvg-navbar">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" data-ng-click="$ctrl.toggleSidebar()"><md-icon md-svg-icon="menu"></md-icon></md-button>
+        <h2 data-translate>navbar.common.dashboard</h2>
+        <div class="flex row row-inherit"><lvg-search-input data-lvg-has-permission="SEARCH" class="flex"></lvg-search-input></div>
+        <md-button class="md-icon-button" data-lvg-is-authenticated ui-sref="calendar">
+            <md-tooltip>{{::('navbar.common.calendar' | translate)}}</md-tooltip>
+            <md-icon md-svg-icon="calendar"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" data-lvg-is-authenticated ui-sref="account">
+            <md-tooltip>{{'navbar.common.my.profile' | translate}}</md-tooltip>
+            <md-icon md-svg-icon="person"></md-icon>
+        </md-button>
+        <md-button data-lvg-is-not-authenticated data-ng-click="$event.preventaDefault(); $ctrl.login()"><span data-translate>index.navbar.login</span></md-button>
+    </div>
+</md-toolbar>

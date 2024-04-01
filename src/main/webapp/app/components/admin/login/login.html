@@ -1,0 +1,174 @@
+<h2 class="md-title" translate>admin.login.anonymous.users.access</h2>
+<md-card>
+    <md-card-content>
+        <div>
+            <md-checkbox ng-class="{'lvg-no-margin-bottom' : !$ctrl.anonEnabled}"
+                         ng-model="$ctrl.anonEnabled"
+                         ng-change="$ctrl.anonChange($ctrl.anonEnabled)">
+                <span translate>common.enable</span>
+            </md-checkbox>
+        </div>
+
+        <div ng-if="$ctrl.anonEnabled">
+            <div>
+                <md-checkbox  ng-model="$ctrl.userHasGlobalRole" ng-change="$ctrl.globalRoleChange($ctrl.userHasGlobalRole)">
+                    <span data-translate>admin.login.anonymous.users.access.globalAccess</span>
+                </md-checkbox>
+            </div>
+            <div>
+                <md-checkbox ng-model="$ctrl.userHasSearchPermission" ng-change="$ctrl.searchRoleChange($ctrl.userHasSearchPermission)">
+                    <span data-translate>admin.login.anonymous.users.access.enableSearch</span>
+                </md-checkbox>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+
+<h2 class="md-title" translate>admin.login.demo</h2>
+<md-card>
+    <md-card-content>
+        <div>
+            <md-checkbox class="lvg-no-margin-bottom" ng-model="$ctrl.authMethod.DEMO" ng-change="$ctrl.updateActiveProviders()"><span translate>common.enable</span></md-checkbox>
+        </div>
+    </md-card-content>
+</md-card>
+
+<h2 class="md-title" translate>admin.login.password</h2>
+<md-card>
+    <md-card-content>
+        <div>
+            <md-checkbox class="lvg-no-margin-bottom" ng-model="$ctrl.authMethod.PASSWORD" ng-change="$ctrl.updateActiveProviders()"><span translate>common.enable</span></md-checkbox>
+        </div>
+    </md-card-content>
+</md-card>
+
+
+<h2 class="md-title" translate>admin.login.ldap</h2>
+<md-card>
+    <md-card-title>
+        <md-checkbox class="lvg-no-margin-bottom" ng-model="$ctrl.authMethod.LDAP" ng-change="$ctrl.updateActiveProviders()"><span translate>common.enable</span></md-checkbox>
+    </md-card-title>
+    <form ng-submit="$ctrl.saveLdapConfig($ctrl.ldap)" ng-if="$ctrl.authMethod.LDAP">
+        <md-card-content>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.ldap.serverUrl</span></label>
+                <input type="text" placeholder="ldap://localhost:10389" ng-model="$ctrl.ldap.serverUrl">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.ldap.managerDn</span></label>
+                <input type="text" placeholder="uid=admin,ou=system" ng-model="$ctrl.ldap.managerDn">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.ldap.managerPassword</span></label>
+                <input type="password" placeholder="secret" ng-model="$ctrl.ldap.managerPassword" autocomplete="off">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.ldap.userSearchBase</span></label>
+                <input type="text" placeholder="ou=system" ng-model="$ctrl.ldap.userSearchBase">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.ldap.userSearchFilter</span></label>
+                <input type="text" placeholder="uid={0}" data-ng-model="$ctrl.ldap.userSearchFilter">
+            </md-input-container>
+            <div>
+                <md-checkbox ng-model="$ctrl.ldap.autoCreateMissingAccount"><span translate>admin.login.enableAutoCreateAccount</span></md-checkbox>
+            </div>
+        </md-card-content>
+        <md-card-actions>
+            <md-button type="submit" class="md-primary"><span translate>button.save</span></md-button>
+            <md-button type="button" ng-click="$ctrl.openLdapConfigModal()"><span data-translate>admin.login.ldap.check</span></md-button>
+        </md-card-actions>
+    </form>
+</md-card>
+
+<h2 class="md-title" translate>admin.login.oauth</h2>
+<md-card>
+    <md-card-title>
+        <md-checkbox class="lvg-no-margin-bottom" ng-model="$ctrl.authMethod.OAUTH" ng-change="$ctrl.updateActiveProviders()"><span translate>common.enable</span></md-checkbox>
+    </md-card-title>
+    <form data-ng-submit="$ctrl.saveOauthConfig()" ng-if="$ctrl.authMethod.OAUTH">
+        <md-card-content>
+            <md-input-container class="md-block">
+                <label><span translate>admin.login.oauth.baseUrl</span></label>
+                <input type="text" ng-model="$ctrl.oauth.baseUrl">
+            </md-input-container>
+
+            <p><span translate>admin.login.oauth.preconfigured-online-providers</span>:</p>
+            <div ng-repeat="provider in $ctrl.oauthProviders | filter: {isConfigurableInstance:false}">
+                <div class="row row-inherit">
+                    <div class="no-grow"><md-checkbox ng-model="$ctrl.oauth[provider.name].present"></md-checkbox></div>
+                    <div class="flex">
+                        <div class="lvg-checkbox__label">
+                            <span class="lvg-cursor-pointer lvg-cursor-pointer--no-focus"
+                                  ng-click="$ctrl.oauth[provider.name].present = !$ctrl.oauth[provider.name].present"
+                                  data-ng-bind="provider.name"></span>
+                        </div>
+                        <div ng-show="$ctrl.oauth[provider.name].present">
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.base-url</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].baseUrl">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.apiKey</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].apiKey">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.secret</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].apiSecret">
+                            </md-input-container>
+                            <div>
+                                <md-checkbox ng-model="$ctrl.oauth[provider.name].autoCreateMissingAccount"><span translate>admin.login.enableAutoCreateAccount</span></md-checkbox>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.callback</label>
+                                <input type="text" disabled value="{{$ctrl.oauth.baseUrl}}login/oauth/{{provider.name}}/callback">
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p><span translate>admin.login.oauth.configurable-oauth-providers</span>:</p>
+            <div ng-repeat="provider in $ctrl.oauthProviders | filter: {isConfigurableInstance:true}">
+                <div class="row row-inherit">
+                    <div class="no-grow">
+                        <md-checkbox ng-model="$ctrl.oauth[provider.name].present"></md-checkbox>
+                    </div>
+                    <div class="flex">
+                        <div class="lvg-checkbox__label">
+                            <span class="lvg-cursor-pointer lvg-cursor-pointer--no-focus"
+                                  ng-click="$ctrl.oauth[provider.name].present = !$ctrl.oauth[provider.name].present"
+                                  data-ng-bind="provider.name"></span>
+                        </div>
+                        <div ng-show="$ctrl.oauth[provider.name].present">
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.base-url</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].baseUrl">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.apiKey</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].apiKey">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.secret</label>
+                                <input type="text" data-ng-model="$ctrl.oauth[provider.name].apiSecret">
+                            </md-input-container>
+                            <div>
+                                <md-checkbox ng-model="$ctrl.oauth[provider.name].autoCreateMissingAccount"><span translate>admin.login.enableAutoCreateAccount</span></md-checkbox>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label translate>admin.login.oauth.callback</label>
+                                <input type="text" disabled value="{{$ctrl.oauth.baseUrl}}login/oauth/{{provider.name}}/callback">
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="($ctrl.oauthProviders | filter: {isConfigurableInstance:true}).length === 0"><p data-translate>admin.login.oauth.no-providers</p></div>
+        </md-card-content>
+        <md-card-actions>
+            <md-button type="submit" class="md-primary"><span translate>button.save</span></md-button>
+            <md-button type="button" ng-click="$ctrl.openOauthAddNewModal()"><span translate>admin.login.oauth.add-new-provider</span></md-button>
+        </md-card-actions>
+    </form>
+</md-card>

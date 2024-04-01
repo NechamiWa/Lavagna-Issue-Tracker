@@ -1,0 +1,119 @@
+<h1 class="md-title">Setup Lavagna, step 2/4: select login type</h1>
+<md-content md-whiteframe="1" class="lvg-login__margin-bottom">
+    <div class="lvg-login__padding">
+        <form ng-submit="$ctrl.submitConfiguration()">
+	        <md-radio-group ng-model="$ctrl.authMethod">
+                <md-radio-button value="PASSWORD">Password</md-radio-button>
+	            <md-radio-button value="DEMO">Demo</md-radio-button>
+	            <md-radio-button value="LDAP">Ldap</md-radio-button>
+	            <md-radio-button value="OAUTH">Oauth</md-radio-button>
+	        </md-radio-group>
+	        <div ng-if="$ctrl.authMethod == 'LDAP'">
+	            <md-input-container class="md-block">
+	                <label for="ldap-serverUrl">Server URL</label>
+	                <input type="text" id="ldap-serverUrl" placeholder="ldap://localhost:10389" ng-model="$ctrl.ldap.serverUrl" ng-required="$ctrl.authMethod == 'LDAP'">
+	            </md-input-container>
+	            <md-input-container class="md-block">
+	                <label for="ldap-managerDn">Manager DN</label>
+	                <input type="text" id="ldap-managerDn" placeholder="uid=admin,ou=system" ng-model="$ctrl.ldap.managerDn" ng-required="$ctrl.authMethod == 'LDAP'">
+	            </md-input-container>
+	            <md-input-container class="md-block">
+	                <label for="ldap-managerPassword">Manager Password</label>
+	                <input type="password" id="ldap-managerPassword" placeholder="secret" ng-model="$ctrl.ldap.managerPassword" ng-required="$ctrl.authMethod == 'LDAP'">
+	            </md-input-container>
+	            <md-input-container class="md-block">
+	                <label for="ldap-userSearchBase">User Search Base</label>
+	                <input id="ldap-userSearchBase" type="text" placeholder="ou=system" ng-model="$ctrl.ldap.userSearchBase" ng-required="$ctrl.authMethod == 'LDAP'">
+	            </md-input-container>
+	            <md-input-container class="md-block">
+	                <label for="ldap-userSearchFilter">User Search Filter</label>
+	                <input id="ldap-userSearchFilter" type="text" placeholder="uid={0}" ng-model="$ctrl.ldap.userSearchFilter" ng-required="$ctrl.authMethod == 'LDAP'">
+	            </md-input-container>
+	            <div>
+	                <h4>Check ldap configuration</h4>
+	                <md-input-container class="md-block">
+	                    <label for="checkLdap-username">Username</label>
+	                    <input type="text" id="checkLdap-username" ng-model="$ctrl.checkLdap.username">
+	                </md-input-container>
+	                <md-input-container class="md-block">
+	                    <label for="checkLdap-password">Password</label>
+	                    <input type="password" id="checkLdap-password" ng-model="$ctrl.checkLdap.password">
+	                </md-input-container>
+	                <div>
+	                    <md-button ng-click="$ctrl.checkLdapConfiguration($ctrl.ldap, $ctrl.checkLdap)" type="button">Check</md-button>
+	                </div>
+	            </div>
+	            <div>
+	                <div data-ng-show="$ctrl.ldapCheckResult">
+	                    <span data-ng-show="$ctrl.ldapCheckResult.first">Everything seems Ok:</span>
+	                    <span data-ng-show="!$ctrl.ldapCheckResult.first">An error occured, trace is:</span>
+	                    <ul>
+                            <li data-ng-repeat="msg in $ctrl.ldapCheckResult.second"><pre ng-bind="msg"></pre></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	     <div>
+	         <div data-ng-if="$ctrl.authMethod == 'OAUTH'">
+	             <md-input-container class="md-block">
+	                 <label for="oauth-baseUrl">Base url for callback urls</label>
+	                 <input id="oauth-baseUrl" type="text" ng-model="$ctrl.oauth.baseUrl" ng-required="$ctrl.authMethod == 'OAUTH'">
+	             </md-input-container>
+	             <h3 class="md-body-2">OAuth provider:</h3>
+	             <div data-ng-repeat="provider in $ctrl.oauthProviders">
+	                     <div>
+	                         <md-checkbox ng-model="$ctrl.oauth[provider].present" ng-required="$ctrl.countSelectedOauth() == 0 && $ctrl.oauthNewProvider.type == null"> {{provider}}</md-checkbox>
+	                     </div>
+	                     <div ng-if="$ctrl.oauth[provider].present">
+	                      <md-input-container class="md-block">
+	                         <label for="oauth-provider-api-key-{{provider}}">Api key</label>
+	                         <input type="text" id="oauth-provider-api-key-{{provider}}" data-ng-model="$ctrl.oauth[provider].apiKey" data-ng-required="$ctrl.authMethod == 'OAUTH'">
+	                      </md-input-container>
+	                      <md-input-container class="md-block">
+	                         <label for="oauth-provider-api-secret-{{provider}}">Secret</label>
+	                         <input type="text" id="oauth-provider-api-secret-{{provider}}" data-ng-model="$ctrl.oauth[provider].apiSecret" data-ng-required="$ctrl.authMethod == 'OAUTH'">
+	                      </md-input-container>
+	                      <md-input-container class="md-block">
+                            <label>Callback url is:</label>
+                            <input type="text" disabled value="{{$ctrl.oauth.baseUrl}}login/oauth/{{provider}}/callback">
+                          </md-input-container>
+	                     </div>
+	             </div>
+	             <h3 class="md-body-2">Custom OAuth provider:</h3>
+	             <div>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.type">Type</label>
+	                     <md-select ng-model="$ctrl.oauthNewProvider.type" required id="oauthNewProvider.type">
+                            <md-option ng-repeat="name in $ctrl.oauthCustomizable" ng-value="name">{{::name}}</md-option>
+                        </md-select>
+	                 </md-input-container>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.name">Name</label>
+	                     <input type="text" data-ng-model="$ctrl.oauthNewProvider.name" id="oauthNewProvider.name" ng-required="$ctrl.oauthNewProvider.type.length > 0" pattern="[a-z]*" maxlength="10">
+	                 </md-input-container>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.baseUrl">Base url</label>
+	                     <input type="text" data-ng-model="$ctrl.oauthNewProvider.baseUrl" id="oauthNewProvider.baseUrl" ng-required="$ctrl.oauthNewProvider.type.length > 0">
+	                 </md-input-container>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.apiKey">Api Key</label>
+	                     <input type="text" data-ng-model="$ctrl.oauthNewProvider.apiKey" id="oauthNewProvider.apiKey" ng-required="$ctrl.oauthNewProvider.type.length > 0">
+	                 </md-input-container>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.apiSecret">Api Secret</label>
+	                     <input type="text" data-ng-model="$ctrl.oauthNewProvider.apiSecret" id="oauthNewProvider.apiSecret" ng-required="$ctrl.oauthNewProvider.type.length > 0">
+	                 </md-input-container>
+	                 <md-input-container class="md-block">
+	                     <label for="oauthNewProvider.callback">Callback url is:</label>
+	                     <input id="oauthNewProvider.callback" type="text" disabled value="{{$ctrl.oauth.baseUrl}}login/oauth/{{$ctrl.oauthNewProvider.type}}-{{$ctrl.oauthNewProvider.name}}/callback">
+	                 </md-input-container>
+	             </div>
+	         </div>
+	     </div>
+	     <div>
+	         <md-button type="button" ng-click="$ctrl.back('first-step')">Back</md-button>
+	         <md-button type="submit" class="md-primary">Continue</md-button>
+	     </div>
+        </form>
+    </div>
+</md-content>

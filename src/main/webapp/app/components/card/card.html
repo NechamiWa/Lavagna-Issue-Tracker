@@ -1,0 +1,19 @@
+<div class="row row-inherit">
+    <div class="col-md-8 col-xs-12">
+        <lvg-card-description card="$ctrl.card" project="$ctrl.project" label-values="$ctrl.userLabels"></lvg-card-description>
+
+        <lvg-card-files card="$ctrl.card"></lvg-card-files>
+
+        <lvg-card-activity card="$ctrl.card" project="$ctrl.project"></lvg-card-activity>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <lvg-card-metadata  card="$ctrl.card" board="$ctrl.board"
+                            project="$ctrl.project" user="$ctrl.user"
+                            milestones="$ctrl.milestones" due-dates="$ctrl.dueDates"></lvg-card-metadata>
+
+        <lvg-card-people card="$ctrl.card" project="$ctrl.project" user="$ctrl.user"
+                         assigned-users="$ctrl.assignedUsers" watching-users="$ctrl.watchingUsers"></lvg-card-people>
+
+        <lvg-card-action-lists card="$ctrl.card"></lvg-card-action-lists>
+    </div>
+</div>

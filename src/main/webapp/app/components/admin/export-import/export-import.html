@@ -1,0 +1,33 @@
+<form ng-submit="$ctrl.importFile.upload()" class="lvg-content">
+    <md-card class="lvg-content__row lvg-content__row-item">
+        <md-card-title ng-if="$ctrl.importing">
+            <md-card-title-text>
+                <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <span ng-if="$ctrl.importFile != null" ng-bind="$ctrl.importFile.file.name"></span>
+            <span ng-if="$ctrl.importFile == null" translate>common.no-file-selected</span>
+            <input type="file" name="file" id="file" class="lvg-input-file__input" nv-file-select uploader="$ctrl.uploader"/>
+            <label class="lvg-input-file__label md-button" for="file">
+                <span translate>button.fileSelect</span>
+            </label>
+            <div>
+                <md-checkbox name="overrideConfiguration"
+                             ng-model="$ctrl.overrideConfiguration"
+                             ng-disabled="$ctrl.importing"
+                             class="lvg-inline-checkbox">
+                    <label translate>admin.export-import.overrideConf</label>
+                </md-checkbox>
+            </div>
+        </md-card-content>
+        <md-card-actions>
+            <md-button type="submit" class="md-primary" ng-disabled="$ctrl.importing || $ctrl.importFile == null">
+                <span translate>admin.export-import.importButton</span>
+            </md-button>
+            <md-button class="md-primary" type="button" ng-click="$ctrl.doExport()" ng-disabled="$ctrl.importing">
+                <span translate>admin.export-import.exportButton</span>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</form>

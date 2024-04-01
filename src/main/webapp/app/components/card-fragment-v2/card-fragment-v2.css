@@ -1,0 +1,289 @@
+lvg-card-fragment-v2 {
+	display: block;
+	/*overflow: hidden;*/
+	padding: 8px;
+	word-break: break-all;
+	outline: none!important;
+}
+
+.lvg-card-fragment-v2__tooltip {
+    width: 260px;
+    color: rgba(0,0,0,0.87) !important;
+    margin-bottom: 0 !important
+}
+
+lvg-card-fragment-v2[view=board] {
+    border: 1px solid #d0d0d0;
+    background-color: white;
+    box-shadow: none;
+    margin-bottom:8px;
+}
+
+lvg-card-fragment-v2[view=board]:hover {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+}
+
+lvg-card-fragment-v2[view=board].lvg-card-fragment-v2--not-draggable:hover {
+    box-shadow: none;
+}
+
+lvg-card-fragment-v2[view=list],lvg-card-fragment-v2[view=search] {
+	background-color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+}
+
+.lvg-card-fragment-v2--watching {
+    background-image: url('images/triangle.gif');
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+
+.lvg-card-fragment-v2__card-head {
+	height:24px;
+	line-height: 24px;
+}
+
+.lvg-card-fragment-v2__card-head-date {
+	float:right;
+}
+
+.lvg-card-fragment-v2__card-data {
+	display: inline-block;
+	margin:0;
+	padding:0;
+	margin-top: 5px;
+	margin-right: 5px;
+	padding: 1px 5px 1px 21px;
+	color: #aaaaaa;
+	background-size: 18px 18px;
+    background-repeat: no-repeat;
+    height:24px;
+    line-height: 24px;
+    border-radius: 4px;
+}
+
+.lvg-card-fragment-v2__card-link {
+	color: #428bca;
+    text-decoration: none;
+}
+
+.lvg-card-fragment-v2__card-link:hover {
+	color: #2a6496;
+    text-decoration: underline;
+}
+
+.lvg-card-fragment-v2__menu {
+	background-color: transparent;
+	outline: 0;
+	border:none;
+	margin:0;
+	display:inline-block;
+	background-size: 24px 24px;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+    line-height: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    float: right;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.lvg-card-fragment-v2__menu:focus {
+	background-color: rgba(158, 158, 158, 0.2);
+	opacity: .5;
+}
+
+/*
+ic_comment_black_48px.svg
+*/
+.lvg-card-fragment-v2__card-data__icon_comment {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjYWFhIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjEuOTkgNGMwLTEuMS0uODktMi0xLjk5LTJINGMtMS4xIDAtMiAuOS0yIDJ2MTJjMCAxLjEuOSAyIDIgMmgxNGw0IDQtLjAxLTE4ek0xOCAxNEg2di0yaDEydjJ6bTAtM0g2VjloMTJ2MnptMC0zSDZWNmgxMnYyeiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4");
+    background-position: 2px center;
+}
+
+/*
+ic_list_black_48px.svg
+*/
+.lvg-card-fragment-v2__card-data__icon_list {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjYWFhIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAxM2gydi0ySDN2MnptMCA0aDJ2LTJIM3Yyem0wLThoMlY3SDN2MnptNCA0aDE0di0ySDd2MnptMCA0aDE0di0ySDd2MnpNNyA3djJoMTRWN0g3eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=");
+    background-position: 2px center;
+}
+
+.lvg-card-fragment-v2__card-data__icon_list.lvg-card-fragment-v2__card-data__white {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAxM2gydi0ySDN2MnptMCA0aDJ2LTJIM3Yyem0wLThoMlY3SDN2MnptNCA0aDE0di0ySDd2MnptMCA0aDE0di0ySDd2MnpNNyA3djJoMTRWN0g3eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=");
+    background-position: 2px center;
+}
+
+/*
+ic_insert_drive_file_black_48px.svg
+*/
+.lvg-card-fragment-v2__card-data__icon_file {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjYWFhIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNiAyYy0xLjEgMC0xLjk5LjktMS45OSAyTDQgMjBjMCAxLjEuODkgMiAxLjk5IDJIMThjMS4xIDAgMi0uOSAyLTJWOGwtNi02SDZ6bTcgN1YzLjVMMTguNSA5SDEzeiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=");
+    background-position: 2px center;
+}
+
+/*
+ic_access_time_gray_48px.svg
+*/
+.lvg-card-fragment-v2__card-data__icon_clock {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjYWFhIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTEuOTkgMkM2LjQ3IDIgMiA2LjQ4IDIgMTJzNC40NyAxMCA5Ljk5IDEwQzE3LjUyIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUyIDIgMTEuOTkgMnpNMTIgMjBjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIuNSA3SDExdjZsNS4yNSAzLjE1Ljc1LTEuMjMtNC41LTIuNjd6Ii8+PC9zdmc+");
+    background-position: 2px center;
+}
+
+.lvg-card-fragment-v2__card-data__icon_clock.lvg-card-fragment-v2__card-data__white {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTEuOTkgMkM2LjQ3IDIgMiA2LjQ4IDIgMTJzNC40NyAxMCA5Ljk5IDEwQzE3LjUyIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUyIDIgMTEuOTkgMnpNMTIgMjBjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIuNSA3SDExdjZsNS4yNSAzLjE1Ljc1LTEuMjMtNC41LTIuNjd6Ii8+PC9zdmc+");
+    background-position: 2px center;
+}
+
+/*
+ic_location_on_gray_48px.svg
+*/
+.lvg-card-fragment-v2__card-data__icon_milestone {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjYWFhIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMkM4LjEzIDIgNSA1LjEzIDUgOWMwIDUuMjUgNyAxMyA3IDEzczctNy43NSA3LTEzYzAtMy44Ny0zLjEzLTctNy03em0wIDkuNWMtMS4zOCAwLTIuNS0xLjEyLTIuNS0yLjVzMS4xMi0yLjUgMi41LTIuNSAyLjUgMS4xMiAyLjUgMi41LTEuMTIgMi41LTIuNSAyLjV6Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==");
+    background-position: 2px center;
+}
+
+.lvg-card-fragment-v2__card-data__icon_milestone.lvg-card-fragment-v2__card-data__white {
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMkM4LjEzIDIgNSA1LjEzIDUgOWMwIDUuMjUgNyAxMyA3IDEzczctNy43NSA3LTEzYzAtMy44Ny0zLjEzLTctNy03em0wIDkuNWMtMS4zOCAwLTIuNS0xLjEyLTIuNS0yLjVzMS4xMi0yLjUgMi41LTIuNSAyLjUgMS4xMiAyLjUgMi41LTEuMTIgMi41LTIuNSAyLjV6Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==");
+    background-position: 2px center;
+}
+
+.lvg-card-fragment-v2__card-data__white {
+	color: #ffffff;
+}
+
+
+.lvg-card-fragment-v2__card-data__action-not-done {
+    background-color: rgba(207,81,61,.15);
+    border: 1px solid #cf513d;
+}
+
+.lvg-card-fragment-v2__card-data__action-full {
+	background-color: rgba(0,204,0,.15);
+	border: 1px solid #00CC00;
+}
+
+.lvg-card-fragment-v2__card-data__due-date-tomorrow {
+    background-color: rgba(230,198,13,.15);
+    border: 1px solid #e6c60d;
+}
+
+.lvg-card-fragment-v2__card-data__due-date-now {
+    background-color: rgba(207,81,61,.15);
+    border: 1px solid #cf513d;
+}
+
+.lvg-card-fragment-v2__card-data__due-date-past {
+    background-color: rgba(236,148,136,.15);
+    border: 1px solid #ec9488;
+}
+
+.lvg-card-fragment-v2__label {
+	display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+    padding: .4em .8em .4em .6em;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+.lvg-card-fragment-v2__label-text-black {
+	color:black!important;
+}
+
+.lvg-card-fragment-v2__label-text-white {
+	color:white!important;
+}
+
+ul.assigned-users {
+	margin: 0;
+	padding: 0;
+}
+
+ul.assigned-users li.assigned-user {
+	list-style-type: none;
+	display: inline-block;
+	color: #aaaaaa;
+	padding: 5px 5px 0 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.lvg-card-fragment-v2__checkbox-container {
+	height:0;
+	width:0;
+	transform: translate(-16px,-16px);
+	float:left;
+	/*display:none;*/
+}
+
+.lvg-card-fragment-v2__selected {
+	border:1px solid rgb(96,125,139);
+}
+
+.lvg-card-fragment-v2__checkbox {
+	background-color: white;
+	position:absolute;
+	height:22px;
+	width:22px;
+	border-radius: 50%;
+	cursor: pointer;
+    outline: none!important;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSI0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTkgMTYuMTdMNC44MyAxMmwtMS40MiAxLjQxTDkgMTkgMjEgN2wtMS40MS0xLjQxeiIvPjwvc3ZnPg==");
+    background-size: 16px 16px;
+    background-position:50% 50%;
+    background-repeat: no-repeat;
+    border:1px solid transparent;
+    opacity: 0;
+}
+
+.lvg-card-fragment-v2__checkbox:focus {
+	border-color:rgba(0,0,0,0.5);
+	display: block;
+	opacity: 1;
+}
+
+lvg-card-fragment-v2:focus .lvg-card-fragment-v2__checkbox,
+lvg-card-fragment-v2:hover .lvg-card-fragment-v2__checkbox,
+.lvg-card-fragment-v2__selected .lvg-card-fragment-v2__checkbox,
+.lvg-card-fragment-v2__static .lvg-card-fragment-v2__checkbox {
+	display: block;
+	opacity: 1;
+}
+
+lvg-card-fragment-v2:focus .lvg-card-fragment-v2__menu,
+lvg-card-fragment-v2:hover .lvg-card-fragment-v2__menu,
+.lvg-card-fragment-v2__static .lvg-card-fragment-v2__menu {
+    display: block;
+    opacity: .5;
+}
+
+lvg-card-fragment-v2.sortable-drag {
+	border: 1px solid #d0d0d0!important;
+}
+
+lvg-card-fragment-v2.sortable-drag .lvg-card-fragment-v2__checkbox-container, lvg-card-fragment-v2.sortable-ghost .lvg-card-fragment-v2__checkbox-container {
+	display:none!important;
+}
+
+lvg-card-fragment-v2.sortable-drag .md-panel-outer-wrapper,
+lvg-card-fragment-v2.sortable-drag .md-panel-outer-wrapper *,
+lvg-card-fragment-v2.sortable-ghost .md-panel-outer-wrapper,
+lvg-card-fragment-v2.sortable-ghost .md-panel-outer-wrapper * {
+    display: none !important;
+}
+
+.lvg-card-fragment-v2__selected .lvg-card-fragment-v2__checkbox {
+	background-color: rgb(96,125,139);
+	background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik05IDE2LjE3TDQuODMgMTJsLTEuNDIgMS40MUw5IDE5IDIxIDdsLTEuNDEtMS40MXoiLz48L3N2Zz4=");
+}

@@ -1,0 +1,64 @@
+.lvg-card-description__textarea {
+    height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.lavagna-card-title-main {
+    width: 100%;
+}
+
+.lvg-card-description__content {
+    word-wrap: break-word;
+}
+
+.lvg-card-description__content pre {
+    white-space: pre;
+    word-wrap: normal;
+    overflow-x: auto;
+}
+
+.lvg-card-description__footer > div {
+    display: inline-block;
+}
+
+.lvg-card-description__edit-button {
+    width: 40px;
+}
+
+.lvg-card-description__updated {
+    font-size: 12px;
+    font-style: italic;
+    color: #aaaaaa;
+}
+
+.lvg-card-description__updated_user {
+    font-weight: 700;
+    color: #7e7e7e;
+}
+
+.lvg-card-description__updated_date {
+    color: #aaaaaa;
+    font-size: 12px;
+}
+
+.lvg-card-description__labels-add {
+    display: inline-block;
+}
+
+.lvg-card-description__divider {
+    margin: 5px 0;
+}
+
+.lvg-card-description__no-label {
+    font-style: italic;
+}
+
+.lvg-card-description__labels-add-button.md-button {
+    min-height: 24px;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+}

@@ -1,0 +1,33 @@
+<ul class="lvg-card-action-list__actionlists"
+    lvg-dnd="$ctrl.actionLists"
+    lvg-dnd-drop="$ctrl.dropActionLists($index, $oldIndex)"
+    lvg-dnd-opts="{group: 'actionlists', animation: 150, handle: 'handle.action-lists'}">
+    <li class="lvg-card-action-list__actionlists-item" ng-repeat="actionList in $ctrl.actionLists | orderBy: 'order' track by actionList.id">
+        <lvg-card-action-list card="$ctrl.card"
+                              action-list="actionList">
+            <handle class="action-lists"><md-icon class="lvg-card-action-list__handle-icon" md-svg-icon="drag"></md-icon></handle>
+        </lvg-card-action-list>
+    </li>
+</ul>
+
+<md-card class="lvg-card-action-lists__new">
+    <md-card-actions class="lvg-card-action-lists__new-actions" data-lvg-has-permission="MANAGE_ACTION_LIST">
+        <form data-ng-role="form"
+              data-ng-submit="$ctrl.addActionList(newActionList);">
+            <div class="row margin-8">
+                <div class="flex">
+                    <md-input-container md-no-float class="lvg-input-container__inline">
+                        <input ng-model="newActionList.name" placeholder="{{'card.action.lists.placeholder.list'|translate}}">
+                    </md-input-container>
+                </div>
+                <div class="flex no-grow">
+                    <md-button md-no-ink class="md-primary" type="submit" ng-disabled="!newActionList.name">
+                        <span data-translate>button.add</span>
+                    </md-button>
+                </div>
+            </div>
+        </form>
+    </md-card-actions>
+</md-card>
+
+

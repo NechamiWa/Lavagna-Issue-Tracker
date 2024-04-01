@@ -1,0 +1,40 @@
+lvg-stats-panel-simple {
+	display: block;
+	margin-bottom:20px;
+}
+
+.lvg-stats-panel-simple__title-tasks_container {
+    display:table;
+    width:100.1%;
+}
+
+.lvg-stats-panel-simple__title-tasks {
+    display: table-row;
+    height: 5px;
+}
+
+.lvg-stats-panel-simple__title-task {
+    display: table-cell;
+    height: 5px;
+}
+
+.lvg-stats-panel__description {
+	padding-right:8px;
+	display: table-cell;
+    vertical-align: top;
+    width: 100%;
+}
+
+.lvg-stats-panel__count {
+	padding-top:8px;
+	font-size:12px;
+	color: rgba(0,0,0,.65);
+}
+
+.lvg-stats-panel__icon {
+	display:inline-block;
+}
+
+.lvg-stats-panel__title {
+    line-height: 30px;
+}

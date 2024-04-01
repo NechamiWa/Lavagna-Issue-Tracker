@@ -1,0 +1,44 @@
+<md-dialog class="lvg-integration--dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2><span translate>admin.integrations.add</span></h2>
+        </div>
+    </md-toolbar>
+    <form role="form" ng-submit="addNewIntegrationCtrl.create()" name="addNewIntegrationForm">
+        <md-dialog-content class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label translate>label.name</label>
+                <input ng-required="true" ng-model="addNewIntegrationCtrl.customIntegration.name">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label translate>label.description</label>
+                <textarea ng-model="addNewIntegrationCtrl.customIntegration.metadata.description"></textarea>
+            </md-input-container>
+
+            <h3 translate>admin.integrations.configuration-parameters</h3>
+            <div ng-repeat="param in addNewIntegrationCtrl.customIntegration.metadata.parameters">
+                <h4 translate>admin.integrations.admin.integrations.configuration-parameters.new.title</h4>
+                <integrations-add-parameter parameter="param"
+                                            on-remove="addNewIntegrationCtrl.removeParameter($param)"></integrations-add-parameter>
+            </div>
+
+            <md-button ng-click="addNewIntegrationCtrl.addParameter()">
+                <span translate>admin.integrations.configuration-parameters.add</span>
+            </md-button>
+
+            <md-input-container class="md-block">
+                <label>Script</label>
+                <textarea ng-model="addNewIntegrationCtrl.customIntegration.code"></textarea>
+            </md-input-container>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="addNewIntegrationCtrl.cancel()">
+                <span translate>button.cancel</span>
+            </md-button>
+            <md-button type="submit" class="md-primary">
+                <span translate>button.create</span>
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,13 @@
+<div class="lvg-content">
+    <md-card class="lvg-content__row lvg-content__row-item">
+        <md-card-content>
+            <div>
+                <md-checkbox ng-model="$ctrl.userHasRole"
+                             ng-change="$ctrl.update($ctrl.userHasRole)">
+                    <span translate>project.manage.anonymous-users-access</span>
+                </md-checkbox>
+            </div>
+            <div translate>project.manage.anonymous-users-access.description</div>
+        </md-card-content>
+    </md-card>
+</div>

@@ -1,0 +1,15 @@
+.lvg-dashboard__tasks {
+    margin-bottom: 21px;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.lvg-dashboard__tasks-switch {
+    flex: 0 0 44px;
+}
+
+.lvg-dashboard__tasks-switch md-switch {
+    margin: 0;
+}

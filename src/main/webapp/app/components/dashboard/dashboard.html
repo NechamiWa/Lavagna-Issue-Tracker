@@ -1,0 +1,41 @@
+<div class="row lvg-content">
+	<div class="col-md-6 col-xs-12 first-md">
+        <div class="lvg-dashboard__tasks row row-inherit start-xs top-xs">
+            <div class="lvg-dashboard__tasks-title flex" data-translate>dashboard.my.projects</div>
+            <div class="lvg-dashboard__tasks-switch" lvg-has-permission="UPDATE_PROFILE">
+                <md-switch ng-model="$ctrl.showArchivedItems" ng-change="$ctrl.updateShowArchivedItems($ctrl.showArchivedItems)"></md-switch>
+                <md-tooltip>{{($ctrl.showArchivedItems ? 'dashboard.projects.hide.archived' : 'dashboard.projects.show.archived') | translate}}</md-tooltip>
+            </div>
+        </div>
+        <lvg-stats-panel-project data-ng-repeat="project in $ctrl.projects | filter:($ctrl.showArchivedItems ? {} : {archived: false})"
+                                 project="project"></lvg-stats-panel-project>
+	</div>
+
+    <div class="col-md-6 col-xs-12 first-xs"
+         data-lvg-is-authenticated
+         data-lvg-has-permission="SEARCH">
+        <div class="lvg-dashboard__tasks" data-translate>dashboard.my.tasks</div>
+        <lvg-rebuild-if-change to-watch="$ctrl.getMetadatasHash()">
+	        <div data-ng-if="$ctrl.totalOpenCards > 0">
+                <lvg-card-fragment-v2 tabindex="0" ng-repeat="card in $ctrl.userCards track by (card.hash+$ctrl.metadatas[card.projectShortName].hash)"
+                                      view="list"
+                                      card-ref="card"
+                                      user-ref="$ctrl.user"
+                                      project-metadata-ref="$ctrl.metadatas[card.projectShortName]"></lvg-card-fragment-v2>
+	        </div>
+        </lvg-rebuild-if-change>
+        <span data-ng-if="$ctrl.totalOpenCards == 0" data-translate>dashboard.no.tasks</span>
+        <div data-ng-if="$ctrl.cardsTotalPages > 1">
+            <lvg-pagination
+                total-pages="$ctrl.cardsTotalPages"
+                current-page="$ctrl.cardsCurrentPage"
+                max-size="7"
+                change-page="$ctrl.fetchUserCardsPage($page)"></lvg-pagination>
+        </div>
+    </div>
+</div>
+
+<md-button class="md-fab md-primary lvg-fab-bottom-right" ng-click="$ctrl.showProjectDialog($event)" aria-label="{{'dashboard.create.project' | translate}}" data-lvg-has-permission="ADMINISTRATION">
+    <md-tooltip md-direction="top">{{'dashboard.create.project' | translate}}</md-tooltip>
+    <md-icon md-svg-icon="add"></md-icon>
+</md-button>
